@@ -1,0 +1,87 @@
+<!-- livebook:{"persist_outputs":true} -->
+
+# AOC
+
+## Day 3
+
+```elixir
+Mix.install([
+  {:kino, github: "livebook-dev/kino"}
+])
+
+input = Kino.Input.textarea("AOC input")
+```
+
+```elixir
+acc = List.duplicate(0, 14)
+input = Kino.Input.read(input)
+
+input
+|> String.split("\n")
+|> Enum.reduce(acc, fn line, acc ->
+  line
+  |> String.trim()
+  |> String.graphemes()
+  |> Enum.with_index()
+  |> Enum.reduce(acc, fn {c, i}, acc ->
+    if c == "1" do
+      List.update_at(acc, i, fn v -> v + 1 end)
+    else
+      acc
+    end
+  end)
+end)
+|> IO.inspect()
+|> Enum.map(fn i -> if i <= 500, do: 0, else: 1 end)
+|> IO.inspect()
+```
+
+```output
+[7, 5, 8, 7, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+```
+
+```output
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+```
+
+```elixir
+input = String.split(input, "\n") |> IO.inspect()
+
+defmodule AOC3 do
+  def is_one_most_common(input, size) do
+    input
+    |> Enum.map(&String.at(&1, 0))
+    |> Enum.count(&(&1 == "1")) >=
+      size / 2
+  end
+
+  def filter([]) do
+    IO.puts("zomg")
+  end
+
+  def filter([result]) do
+    IO.inspect(result)
+  end
+
+  def filter(input) do
+    size = length(input)
+
+    input =
+      if is_one_most_common(input, size) do
+        Enum.filter(input, fn l -> String.at(l, 0) == "1" end)
+      else
+        Enum.filter(input, fn l -> String.at(l, 0) == "0" end)
+      end
+
+    filter(input)
+  end
+end
+
+AOC3.filter(input) |> IO.inspect()
+```
+
+```output
+["00100", "11110", "10110", "10111", "10101", "01111", "00111", "11100",
+ "10000", "11001", "00010", "01010"]
+```
