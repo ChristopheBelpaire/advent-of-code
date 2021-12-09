@@ -13,7 +13,7 @@ defmodule AOC17 do
   def find_sum([], c), do: 0
 
   def find_sum(list, counter) do
-    if Enum.sum(counter) == 25, do: IO.inspect(counter)
+    if Enum.sum(counter) == 150, do: IO.inspect(counter)
     list
     |> Enum.with_index()
     |> Enum.reduce(counter, fn({e, i}, counter) ->
@@ -50,5 +50,5 @@ input = "11
 |> Enum.map(&String.to_integer(&1))
 #|> IO.inspect()
 
-input = [20, 15, 10, 5, 5, 0]
+#input = [20, 15, 10, 5, 5, 0]
 AOC17.find_sum(input, []) |> IO.inspect()
