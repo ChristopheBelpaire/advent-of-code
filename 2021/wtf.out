@@ -150,4 +150,4 @@ true
 ["start", "dc", "kj", "dc", "end"]
 ["start", "dc", "kj", "dc", "HN", "end"]
 ["start", "dc", "kj", "dc", "kj", "HN", "end"]
-false
+true
