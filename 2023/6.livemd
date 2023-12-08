@@ -1,0 +1,29 @@
+# Untitled notebook
+
+```elixir
+input = [{47, 207}, {84, 1394}, {74, 1209}, {67, 1014}]
+```
+
+## Section
+
+```elixir
+defmodule WaitForIt do
+  def distance(hold, time) do
+    hold * (time - hold)
+  end
+
+  def valid_races(time, distance) do
+    Enum.filter(1..time, fn hold -> distance(hold, time) > distance end)
+  end
+
+  def solve(input) do
+    Enum.reduce(input, 1, fn {time, distance}, acc ->
+      (WaitForIt.valid_races(time, distance) |> length()) * acc
+    end)
+  end
+end
+
+WaitForIt.solve(input) |> IO.inspect(label: "part 1")
+
+WaitForIt.solve([{47_847_467, 207_139_412_091_014}]) |> IO.inspect(label: "part 2")
+```
