@@ -189,47 +189,57 @@ defmodule GearRatios do
   def build_next_to_stars(lines, {number, start_x, end_x}, y, stars) do
     stars =
       if at(lines, start_x - 1, y) == "*" do
-        Map.update(stars, {start_x - 1, y}, [], fn list -> [list | number] end)
+        Map.update(stars, {start_x - 1, y}, [number], fn list -> [number | list] end)
       else
         stars
       end
 
     stars =
-      if at(lines, start_x + 1, y) == "*" do
-        Map.update(stars, {start_x + 1, y}, [], fn list -> [list | number] end)
+      if at(lines, end_x + 1, y) == "*" do
+        Map.update(stars, {end_x + 1, y}, [number], fn list -> [number | list] end)
       else
         stars
       end
 
-    Enum.reduce((start_x - 1)..(end_x + 1), fn _x, stars ->
+    Enum.reduce((start_x - 1)..(end_x + 1), stars, fn x, stars ->
       stars =
-        if at(lines, start_x + 1, y) == "*" do
-          Map.update(stars, {start_x - 1, y}, [], fn list -> [list | number] end)
+        if at(lines, x, y - 1) == "*" do
+          Map.update(stars, {x, y - 1}, [number], fn list -> [number | list] end)
         else
           stars
         end
 
-      if at(lines, start_x + 1, y) == "*" do
-        Map.update(stars, {start_x + 1, y}, [], fn list -> [list | number] end)
+      if at(lines, x, y + 1) == "*" do
+        Map.update(stars, {x, y + 1}, [number], fn list -> [number | list] end)
       else
         stars
       end
     end)
   end
 
-  # defp is_symbol?(e), do: e not in ["."]
+  def part_number?(lines, {_number, start_x, _end_x}, y) do
+    if is_symbol?(at(lines, start_x - 1, y)) || is_symbol?(at(lines, start_x + 1, y)) do
+      1
+    end
 
-  def part1(_input) do
-    # lines = input |> String.split("\n")
+    #  Enum.find((start_x - 1)..(end_x + 1), stars, fn (x, stars) -> 
 
-    # lines
-    # |> Enum.map(&parse(&1, [], 0))
-    # |> Enum.with_index()
-    # |> Enum.map(fn {line, y} ->
-    #   Enum.map(line, fn number -> part_number?(lines, number, y) end)
     # end)
-    # |> List.flatten()
-    # |> Enum.sum()
+  end
+
+  defp is_symbol?(e), do: e not in ["."]
+
+  def part1(input) do
+    lines = input |> String.split("\n")
+
+    lines
+    |> Enum.map(&parse(&1, [], 0))
+    |> Enum.with_index()
+    |> Enum.map(fn {line, y} ->
+      Enum.map(line, fn number -> part_number?(lines, number, y) end)
+    end)
+    |> List.flatten()
+    |> Enum.sum()
   end
 
   def part2(input) do
@@ -243,6 +253,9 @@ defmodule GearRatios do
         build_next_to_stars(lines, number, y, stars)
       end)
     end)
+    |> Map.values()
+    |> Enum.filter(&(length(&1) == 2))
+    |> Enum.reduce(0, fn [a, b], acc -> acc + a * b end)
   end
 end
 
