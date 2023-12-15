@@ -1,0 +1,291 @@
+# Day 14
+
+```elixir
+input =
+  "......#.O#O.##...O.....#...#..##...OO#.OO.......O.##....O.......O..#.#..O.O...O#O.O....#.O..OO..O.O.
+.##.##OO..#.#O..##..OOO#..O.....O.O...#.........#.......#.O#.O..O...O..OO#O..O....#..O..#OO.O..O....
+O.....#..#..O.#OOO.OO..O..#..#O.....O...#.O..#..#O#.........#.#.....###.#.#.O...#.#.O......O..OO..#.
+O..#.#..#........O......O.OO#.OO..O.O...O.O.......O...O......#....O##.#.OO.#..#.O#O.O.#.#.O...#...O.
+...O........#.O.....#O.....OO#.#.##O...#..OO...#.O.#.##.OO...#.O.#O..O......#..#.....#..#..O#..#....
+..O....O.....O.#..O...O..#O..O.O.#....#.#OO.O#.#..#....#..#....#.OOO..O.O#O##O......#.O.O...#O.....O
+.OO.#....#.O..O..OO.....#.O.OO........OO...#.#..O....#.O.....O.#.#..#...O#.#.O##O..#O#.OO..#O.#.O#..
+.O..O.##O...O.O..O.O.....O....O...#O.........O.....O.#.O........O.OO.#O....OO..O..O.........#O......
+....#....O...O...#OO#....#O......O#..O.#OO.#.##.#.....O.#O.O##....#.O.......O.#O##........#......O.O
+.#OO#.OO.O.##O.#..#.##OO.O....O#.....#...##..#.....#O#O.O....O.O..#....O...#.O.O.....O..#OOO#O...#O.
+#....#......#..O.........#..#..O.###..#...#.O.O...OOO#......#..#O...O#..#OO#.#..#....#OO.OOO.....OO.
+.OO#....###....OO..#O..O..O.O..O.O..O...#..#O...#O.OOOO..#..##...#.O.OO..#O...#.O#....O...O...#....#
+.....O...O###O.#....#.O.....O..OOO.....O.#.O.O#.#.O.#.O..O...#OO...#O.#O....O.#.#....#O#..O......OO#
+.O#.#.O.OO......#.....#....O.....O.O...OOO..........##......O......O....OO...O..O#....O....OO.......
+#.......#...O.OOO...##O.OO.O.O...O..OO#O#O###.....#.OOO.O#O#.....#..#.O###O.......#OO.O...O.O....O.O
+O....#.O.............O..#.......O.#.....O....#..O.#O#OO.O.#O.O....O..#O#.O....#O#OO..#..O.O......OO.
+O...#.O.OO.O.#O#O.#.....###.O..#.#.#.O.O..#..#........#.O...#....#.O.....O.....#O.O..O..#...##....O.
+....#............O#.....O...OOO..#O....##..#..O#...O..##.O...O....#.......##.O.#.#O..O..O.#O#...###O
+...#O...O.OO#.....O..#......O.O#O..##O.O.O..#.#O.......O..O...#....O...#.#O...#.O.#O#.#.#O..O.###O.O
+#..#O..O.#...#...#..O..#..#......O.....O.#...O..#.OO........#..#....#...##..O..O..O.......O...OO...O
+.OOO...O.........#.O....O..O##....##.......#....#O..#.OO.O......O#O....#.......O......O.O......##..O
+......#...#O#...#...#OO.O#...O.O.O....O.O.....#.#..O.........O#.#.#..O#.#..#.......O.O....O...OO.O..
+...........#.OO....OOOO.....O...O#...O...#OO..O.O.#..#.O##O........#......#...#.#...##OO....#O#O###.
+.#.##O....O#.O........O........OOO.OO..#..OO.....O.O.####...OO..O...#.O...O.OOO.#.....#..#.OO#.#O#O.
+..O..#.#..OO....OO..O............OO.....O#..OOO.O.O..#.O...O..O.OO#.O.#O.OO......#.##......O.#OO....
+#.O...#O#O...O.O....O...#.###O...#...#...O..OO...O.......O.#....#..O.#O.#O..O..#O#...O....#.O.##O#..
+.O#.....OO....O#.#.......#.#..###OO.......O....#...#O..#..#.O.O....O.O..#O........##O..#...O#.#O..O#
+.O..##..#.....#.......#.....O....#..#O...#O#.O..O.O............O...#.#.#..OO#...O..#..O.O..#.....O.#
+..O..O#..#.###O..........#..O.OO.....O#.O..O...#.......###.......O..O#...#O##..O...O...#O....O#...O.
+..#O.#...OOOO.O...OO.OO...#....#.#.##...#.O.#O..#..O........O#.O...O.O#.....O#.#O..O...O.....#..#...
+OO.....O.O#.O#.#.#...O#.#...#.........OO.#.#...#....O.OO...O...#O.##.O........O.O...O..O#..O..#.#.O.
+.#.#..O..O..OO##...#.O.###O...#.O.....O...O...OO#.O...#O.#....#..OO#.O.O...#O#.#....O...#OO#..OO.#O.
+O..O....O......#..O.#.#.#.#.....O.....#.#.O...O....OO....O.....O.....O...O.#O.....#OO...#..#.##..#..
+..O#....#..##......O..O..#....OO....OOO...#O...#...O..##..#...OO...OO......O#.OO....O....O.#O..O.O#O
+.....O.....#OOO.O.O.OO..O.O....#....O..O#O#..#.#......#.O.O##.O..O......OOO...O.........O..O#.O.##.#
+.O.#.....O#...O#.....OOO....O.O#....#.OO#......O........#.OO#O...O.##O.O....O..O#O.#.......O.....O#.
+..O..#.O.....#.OOO.#.....#O.#...O.OO..O.....#O.###...O.#..##...O...#.##......O....O...O#....O....O..
+.O.O#O.O#.O......#.#.O..O#.......O.OO...OO...O.#OO#.....OO.O.O..#..OOO.....O#....O.#.....#....#.O...
+..O.........#.O..##...#..#OO#O#.#..#......O.#...#..#O.........#.#...OO....#......OO#O.##O.O..OO#....
+...O#.O.#.#........#.#..O.O#...O.#......O....##..##.#.O..OO.#.#....O..O....O..#O.#...#O#.O...#....O#
+...O..#...O...#O...#...OO.#O..#.O....O.#.O..O..O#.O....O.##O..#O.##....#.OO..#.#..#...OOO.O..O.#....
+.......O#.O.#O##O..O..O.....O...O..O#O..O#O..#....O..O........O.....OO#...#...O.O#O....#.OO#....##..
+#.##O#.......#...O#...#...#...#O.O.O...O..#.OO......#.O.#...##.O.#.O..O..#O#O...........OOOOOOO....#
+.....O..O.#..O......#....O.....OO..O..#.....#.O..#..OO..#.OO.O.#....#...##...O.......#OO.O...#O.....
+O.......##..OO...#..O.#.#.#.....O#.....O..O#.O#....##....O.#..OO.#..#OOO.O.O###O#.#OO......O...O...O
+.......O..##O....O...#..#....O..OO#..O##O...O.OO....#....O...#.##O...O...##..#.#.O..O#O....#O...#O..
+O.O.....O.O#.O#.O....O.#..##O.#.O..#.#.O.O###.#.O...#..O.O#...#.O.....#O..OO.O#O#..#O#.#...........O
+.#...O.O#...#..OOO.O....O..#....O#...#........O#O.##.#...OO.....#....#O..#O.....O#...O...........#..
+.#.#...O#O.....O#OO.#O....O##..##..O...#..O.O.O.....O..#O..O#O......#.O...O........O...#.........O.O
+O.#O.##.....O#...OOO.......O.O.#.#.#.....#.OO.......#O.....#.O.O#...O##..#.#.............#.O#O....#.
+...O##.O#....OO.........#OO........O.O.OOO.#.#..O..#...OO....OO..........O...OO#OO..#O...O.O..O...O.
+.OO.O#..#.#.O...#O...O..#...O.O..#..##.........#..##O.OO..#..O#.........#O.OOO......O.##...O#O....#.
+.OOO....O...#..#O.......#.O......OO.O#O.....O...O..#....O.O#......O.O....O....OOO###..OO...#OO......
+.O..O....#...OO.O...#....#O.O...#...OO##.....O..O...O........O...O#O...O...O.O....OO.OO......O.....#
+...#...#.OOO...O.......#......O.O.#.##.#.O.O...##.OO.#.O.O..OO#......OO..O.O#.#.......#..#.OO.O.OOO.
+O#..#..##..O..OOO..O....#..O.......O...##O#..#..#.O.OO..#.O....#...OOO..O.O...OOO#.........#.#O...O.
+.#...O..#.##.O........O..#..#O..##...#..OO...#.....O#..O.....#.##......#..OO........O..O#....#O#....
+O.O#..O..#OOO..#.......#...#.O....##...#.O#...O......##........O.O####O.OO#..O....#...##O#..O..#....
+....#..O..#.O..O#O.#.......O.##....O#O#.OO.OO#.......O.O#..O...#O.OO.O.#..##OO#.O..OO.O.#OO#....O#O.
+....O..O...O...O#.#O.O...#.#O...O...O...O....#O##.#......##......O.....OO###OO....OO##.#...#.....OO#
+.O.O.#...O...O......#.O..OOO#..O.O...O.#O......O......O...O.##..O.....#..#..O.#....O...##...........
+#.O..##O.OO.O.....###O##OOO#O.#.#OO.O.O.O...#.#O#OOOO#.#O..O....O......OO....O........##.O..#O..O...
+O#O..#OOO.O..O......#...O.......O.#..O#........#..##..#..O..O...#.#..#....O..O..OO.......O..#..O#..#
+..#....#.O..#.O#OO...........#...#.#OO#...#...#.##..O.#O.O.##...O#.#...O.##....O.O.O....O..O#.O.##.O
+O..#.O...O....#....##.....#.#.O#..O..O.....#O.OO#.O..#...#.#.#.O.#..O#..OO.##O..O......O#O#..#..O.O.
+.O....O.....O.#.......O.......O...#O..#...O..#OO##..O...##.#.O.O#.O..OO.......#OO.O....OO....##O.OO#
+..OO.#..O.......#O.O....O..#.O.O.OO....O..#....O.O.O....OO.#O##.....OOO#..O.#O.#...##OO.#...O.O.O..#
+..OO..OO.O#O...O..........O........O.O..#.#.O.O.......#O...O.O...##.#....#.O..#.....#...O.#...OO#O.#
+.O.O.O.O..O#...O.....#.....O..O#....O..#..O###.O#.O.O...O.....O...##.#...O#..O#..O......O#...O.O....
+.#...OO...OO.O#O.#....#....#O#..#...O.O...#OO.#O..#...#.O.......O#O..O#..#.#.OO...##.OO..O.#...O....
+....##...OOO..OO..O.O..#..#..##O..#O...........#..#..O#.OO.#....#..##OO#O.O#..#O#.##O##O##OO.O.#O.#O
+.....#..O.....#....O#..#.O#.#..#OO.#..O.....O...#..#.O.O....#.#O.O.#..#.O.OO..O..#..O..#..#OOO....#O
+OO#.#O..........O.......O#O..#O.#.##OO.#....O..O..#.O....#OO..#.##...#.....##O#.O.O...O#..O#..#....#
+.O..O.OO..O.#...........OOO##..O..O...O.O#.O#OO...O.#...O.#.O.##.#..O.OO##.O.##O.O...O....OO#.......
+.OOO.......#..O......OO.#...O...O#O.#......#.......O.#..#O..#O#...O.........OOO...O...##O.....#...OO
+O..O.......#.O.O..#O##.##O.......#...O..OO.OO.#.OO.#.O.#.O...O....OO..O.##.......O....#.#.O..#....##
+#..O.OO....#O......O..O.O...#.O....OO.O.OO..#..OO......#.....#.##.OO.##O.#O......#...O.OOO.....O..O.
+.O....##..OO.##O####..........O##.##.O..O#O##.#O.#..O#......#O.OO........O#......##O...#OOO.....#.#.
+.....#O..#..#....OO#....O.##....O.O.O.O#..#O.O..O....OO..OOOO.O.O.O..O....#.#..O..O..#...OO....#.O#O
+#.#.#OO.....##.O...........#.##...#.#.O#O......#.......O.OOO..#.O...O....#.O.....#....O..#..O...##O.
+......OO...#....#...O#.OO...OO...O...O..#.#....##......O..................O.O..#.##......#.........#
+..O..#.O..##O.#.OO##O.OO.O..O..#....O.#.#.O.O..OO........O......O..O..#........###.#....O.#.#.......
+..##.......OO#..#.O.O#O.##.#..#.#...#O......O.O..O#...#O.O...OO...#..O#..#..O.#..O##..#...#..##..#O#
+#O.OO..#....O...OO.#...O#.....O#..#..O...OO..#.....OO#.#.O...O..O.O.O.O.......O..O#..O..#OO.O#..#O#O
+......#........O.......#.O.O#.O...#...O.#........O..#O.#.O...O..O.##..O.O.........#OO.##............
+#OO.O.O#O.#O..O.O.#.O..#.#O.O#......##..#O.........#O.....O..O#.##OOO.#......##...O.#..O##...O.#O.#.
+#...O.#O.O..OO...O.##...#.O...O#O.#.#.O....O......O....O...#...O..#.....O#....O.O.#O.......#.O.###.O
+....##..O......O.........#.O..#..#O...OOO....#O###......#.#...#..OO....#...OO..O#.O..##.O.#........#
+......#.O#O#...OOO....OO..#.#...O...OO......#.###........O.OOO......##..O#...OO..O.#OO#....O.OO.##..
+.#O#O#...##O...##O#...#.............#.#.O..O#OOO.##O#.O..#....O#....O......O..........#.#..O#.#...O.
+O#O#.....OOO.....#............#.OO.#.O...O...O..#...#...##...O...O...O..#..O....O.....O.........#...
+...#O......O.##..#O...O#.O#O...O...#...O...O..#..O.O..........#....##..O.......#........#OO.........
+........#.O....O#.#.#O......##..#.#.....O.#..#...O..OO.O.#OO..O....O#...O.#..O.O...#.O.#O..O.O..#OO.
+..#.#.......#...#.O#...OOOOO..#...O...OOOO#..#...O.#OO..#..O............O....O..#.O.#.O.#...#..O.#.#
+.#O....#.O..#O.O.#..#OO....O.O..O##O...O.##.....#..OO.##...#....OO...#.OO...O.#.O#.....##.#OO.#.##..
+.O..O.O...##......#OOO..OO....O....O#..#.......O....O...#O.#.O.O#O#O#.......O.#.....O.....##.#..#.O.
+#.#O..O##....OOO..O##....#O.O.O##...O.#OO..##..O.#...O..O#...O.....#.##....O..OO.#.O...O.OO..#..O...
+..#.#...O..OOO#...#..........#.O...###.......O..O....O..#..#....##.....OO#O......O.OO....#..#...#OOO
+.O...O...#.##.#OO.#.O...O...O#O.#O....#..#....O#...OO.O....#O.O........O....#.....O...O#.OO..#......
+.OO.O.#....O.O#......O#...#.##O#...O.#....#..O#O..#...#....O..OOO#.#.....O#.#O.##.#O#O.#.O....#.##O."
+```
+
+## Section
+
+```elixir
+defmodule ParabolicReflectorDish do
+  def parse(input) do
+    input
+    |> String.split("\n")
+    |> Enum.map(&String.codepoints(&1))
+  end
+
+  def at(input, x, y) do
+    input
+    |> Enum.at(y)
+    |> Enum.at(x)
+  end
+
+  def update_at(input, x, y, v) do
+    List.update_at(input, y, fn line -> List.update_at(line, x, fn _v -> v end) end)
+  end
+
+  def tilt_north(_input, _x, 0), do: 0
+
+  def tilt_north(input, x, y) do
+    Enum.reduce_while((y - 1)..0, y - 1, fn _current_y, min_y ->
+      if min_y == 0 do
+        if at(input, x, min_y) == "." do
+          {:halt, 0}
+        else
+          {:halt, 1}
+        end
+      else
+        if at(input, x, min_y) == "." do
+          {:cont, min_y - 1}
+        else
+          {:halt, min_y + 1}
+        end
+      end
+    end)
+  end
+
+  def tilt_west(_input, 0, _y), do: 0
+
+  def tilt_west(input, x, y) do
+    Enum.reduce_while((x - 1)..0, x - 1, fn _current_x, min_x ->
+      if min_x == 0 do
+        if at(input, min_x, y) == "." do
+          {:halt, 0}
+        else
+          {:halt, 1}
+        end
+      else
+        if at(input, min_x, y) == "." do
+          {:cont, min_x - 1}
+        else
+          {:halt, min_x + 1}
+        end
+      end
+    end)
+  end
+
+  def tilt_all_north(input) do
+    input
+    |> Enum.with_index()
+    |> Enum.reduce(input, fn {line, y}, updated ->
+      Enum.with_index(line)
+      |> Enum.reduce(updated, fn {_e, x}, updated ->
+        if at(updated, x, y) == "O" do
+          new_y = tilt_north(updated, x, y)
+
+          updated
+          |> update_at(x, y, ".")
+          |> update_at(x, new_y, "O")
+        else
+          updated
+        end
+      end)
+    end)
+  end
+
+  def tilt_all_west(input) do
+    input
+    |> Enum.with_index()
+    |> Enum.reduce(input, fn {line, y}, updated ->
+      Enum.with_index(line)
+      |> Enum.reduce(updated, fn {_e, x}, updated ->
+        if at(updated, x, y) == "O" do
+          new_x = tilt_west(updated, x, y)
+
+          updated
+          |> update_at(x, y, ".")
+          |> update_at(new_x, y, "O")
+        else
+          updated
+        end
+      end)
+    end)
+  end
+
+  def tilt_all_south(input) do
+    input
+    |> Enum.reverse()
+    |> tilt_all_north()
+    |> Enum.reverse()
+  end
+
+  def tilt_all_east(input) do
+    input
+    |> Enum.map(&Enum.reverse(&1))
+    |> tilt_all_west()
+    |> Enum.map(&Enum.reverse(&1))
+  end
+
+  def cycle(input) do
+    input
+    |> tilt_all_north()
+    |> tilt_all_west()
+    |> tilt_all_south()
+    |> tilt_all_east()
+  end
+
+  def load(input) do
+    input
+    |> Enum.reverse()
+    |> Enum.with_index()
+    |> Enum.reduce(0, fn {line, i}, acc ->
+      count = Enum.count(line, &(&1 == "O"))
+      count * (i + 1) + acc
+    end)
+  end
+
+  def part1(input) do
+    input
+    |> parse()
+    |> tilt_all_north()
+    |> load()
+  end
+
+  def part2(input) do
+    input =
+      input
+      |> parse()
+
+    {loop_start, loop_end} = find_loop(input, [], 0) |> IO.inspect(label: "loop start")
+    n = 1_000_000_000 - 1
+    rest = rem(n - loop_start, loop_end - loop_start) |> IO.inspect(label: "rest")
+
+    input
+    |> loop(loop_start + rest)
+    |> load()
+    |> IO.inspect()
+
+    #   input |> loop(n) |> load() |> IO.inspect()
+
+    # a = input |> loop(2) |> List.flatten()
+    # b = input |> loop(16) |> List.flatten()
+    # a == b
+  end
+
+  def loop(input, n) do
+    Enum.reduce(0..n, input, fn _n, acc ->
+      #  IO.inspect(load(acc))
+      cycle(acc)
+    end)
+  end
+
+  def find_loop(current, existing, counter) do
+    next = cycle(current)
+    next_flat = List.flatten(next)
+
+    if next_flat in existing do
+      index =
+        existing
+        |> Enum.reverse()
+        |> Enum.find_index(fn e -> next_flat == e end)
+
+      {index, counter}
+    else
+      find_loop(next, [next_flat | existing], counter + 1)
+    end
+  end
+end
+
+input
+|> ParabolicReflectorDish.part2()
+```
