@@ -1413,27 +1413,50 @@ defmodule PointOfIncidence do
     end)
   end
 
-  def find_symmetry([], _, _), do: :none
+  def find_symmetry([], _, _, _, _), do: :none
 
-  def find_symmetry([head | tail], current, pos) do
+  def find_symmetry([head | tail], current, pos, direction, nil) do
     current = [head | current]
     sym = Enum.slice(tail, 0..(length(current) - 1))
-    if current == sym, do: pos, else: find_symmetry(tail, current, pos + 1)
+    if current == sym, do: pos, else: find_symmetry(tail, current, pos + 1, direction, nil)
   end
 
-  def analyse(pattern) do
+  def find_symmetry(
+        [head | tail],
+        current,
+        pos,
+        direction,
+        {original_direction, original_pos, score}
+      ) do
+    current = [head | current]
+    sym = Enum.slice(tail, 0..(length(current) - 1))
+
+    if current == sym && (direction != original_direction || original_pos != pos),
+      do: pos,
+      else:
+        find_symmetry(
+          tail,
+          current,
+          pos + 1,
+          direction,
+          {original_direction, original_pos, score}
+        )
+  end
+
+  def analyse(pattern, original_analyse \\ nil) do
     cond do
-      (result = find_symmetry(pattern, [], 1)) != :none ->
-        result * 100
+      (result = find_symmetry(pattern, [], 1, :right, original_analyse)) != :none ->
+        {:right, result, result * 100}
 
-      (result = find_symmetry(Enum.reverse(pattern), [], 1)) != :none ->
-        (length(pattern) - result) * 100
+      (result = find_symmetry(Enum.reverse(pattern), [], 1, :left, original_analyse)) != :none ->
+        {:left, result, (length(pattern) - result) * 100}
 
-      (result = find_symmetry(reverse(pattern), [], 1)) != :none ->
-        result
+      (result = find_symmetry(reverse(pattern), [], 1, :down, original_analyse)) != :none ->
+        {:down, result, result}
 
-      (result = find_symmetry(Enum.reverse(reverse(pattern)), [], 1)) != :none ->
-        length(hd(pattern)) - result
+      (result = find_symmetry(Enum.reverse(reverse(pattern)), [], 1, :up, original_analyse)) !=
+          :none ->
+        {:up, result, length(hd(pattern)) - result}
 
       true ->
         :none
@@ -1455,8 +1478,9 @@ defmodule PointOfIncidence do
   end
 
   def find_smug(pattern, pos) do
-    if (result = flip(pattern, pos) |> analyse()) != :none &&
-         result != analyse(pattern) do
+    original_analyse = analyse(pattern)
+
+    if (result = flip(pattern, pos) |> analyse(original_analyse)) != :none do
       result
     else
       find_smug(pattern, pos + 1)
@@ -1466,7 +1490,11 @@ defmodule PointOfIncidence do
   def part1(input) do
     input
     |> parse()
-    |> Enum.map(&analyse(&1))
+    |> Enum.map(fn a ->
+      a
+      |> analyse(nil)
+      |> elem(2)
+    end)
     |> Enum.sum()
   end
 
@@ -1474,8 +1502,8 @@ defmodule PointOfIncidence do
     input
     |> parse()
     |> Enum.map(fn pattern ->
-      IO.inspect(pattern)
       find_smug(pattern, 0)
+      |> elem(2)
     end)
     |> Enum.sum()
   end
